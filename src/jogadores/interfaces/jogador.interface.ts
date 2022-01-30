@@ -1,8 +1,9 @@
-export interface Jogador{
-    readonly _id: string;
-    readonly numeroTelefone: string;
-    readonly email: string;
-    nome: string;
-    ranking: number;
-    urlFotoJogador: string;
+import { Document } from 'mongoose';
+export interface Jogador extends Document {
+  readonly numeroTelefone: string;
+  readonly email: string;
+  nome: string;
+  ranking: string;
+  posicaRanking: number;
+  urlFotoJogador: string;
 }
