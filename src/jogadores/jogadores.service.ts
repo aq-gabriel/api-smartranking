@@ -20,10 +20,6 @@ export class JogadoresService {
   ): Promise<Jogador> {
     const { email } = criarJogadorDto;
 
-    // const jogadorEncontrado = this.jogadores.find(
-    //   (jogador) => jogador.email === email,
-    // );
-
     const jogadorEncontrado = await this.jogadorModel.findOne({ email }).exec();
 
     return jogadorEncontrado
@@ -48,42 +44,15 @@ export class JogadoresService {
   }
 
   async deletarJogador(email: string): Promise<any> {
-    // const jogadorEncontrado = this.jogadores.find(
-    //   (jogador) => jogador.email === email,
-    // );
-    // this.jogadores = this.jogadores.filter(
-    //   (jogador) => jogador.email !== jogadorEncontrado.email,
-    // );
-
     return await this.jogadorModel.remove({ email }).exec();
   }
+
   private async criar(criarJogadorDto: CriarJogadorDto): Promise<Jogador> {
-    // const { nome, numeroTelefone, email } = criarJogadorDto;
-
-    // const jogador: Jogador = {
-    //   _id: uuid(),
-    //   nome,
-    //   numeroTelefone,
-    //   email,
-    //   ranking: 3,
-    //   urlFotoJogador: 'www.google.com.br/foto123.jpg',
-    // };
-
-    // this.jogadores.push(jogador);
-    // this.logger.log(`criaJogadorDto: ${JSON.stringify(this.jogadores)}`);
-
-    // return this.jogadores.slice(-1)[0];
-
     const jogadorCriado = new this.jogadorModel(criarJogadorDto);
     return await jogadorCriado.save();
   }
 
   private async atualizar(criarJogadorDto: CriarJogadorDto): Promise<Jogador> {
-    // const { nome } = criarJogadorDto;
-    // jogadorEncontrado.nome = nome;
-
-    // return jogadorEncontrado;
-
     return await this.jogadorModel
       .findOneAndUpdate(
         { email: criarJogadorDto.email },
